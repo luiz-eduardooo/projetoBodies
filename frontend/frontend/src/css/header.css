@@ -1,0 +1,35 @@
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+       background-color: white;
+       align-items: center;
+    padding: 10px;
+    height: 70px;
+}
+#user > span{
+    cursor: pointer;
+    margin-left: 20px;
+    color: #5290c7be;
+    width: 50px;
+}
+img{
+    width: 150px;
+    height: 50px;
+}
+
+#containerHeader{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+a{
+    margin-right: 30px;
+    color: #5290c7be;
+    font-size: 18px;
+}
+a:hover{
+    font-size: 20px;
+    color: #62a4ba;
+}
