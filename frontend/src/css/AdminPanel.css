@@ -1,0 +1,157 @@
+/* Container principal */
+.admin-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Argue Demo', 'Inter', sans-serif;
+}
+
+/* Cabeçalho do Painel */
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.admin-title {
+    font-family: 'Glimmer of Light', serif;
+    font-size: 2.5rem;
+    color: #4193ae; /* Azul */
+    margin: 0 0 5px 0;
+}
+
+.admin-subtitle {
+    color: #666;
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Botão de Adicionar */
+.btn-add-new {
+    background-color: #84b37e; /* Verde */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(132, 179, 126, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-add-new:hover {
+    background-color: #6d9c67;
+    transform: translateY(-2px);
+}
+
+/* Tabela */
+.admin-table-wrapper {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    overflow-x: auto; /* Permite rolar a tabela no celular */
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.admin-table th {
+    background-color: #f7f9f8;
+    color: #555;
+    font-weight: 600;
+    padding: 18px 20px;
+    border-bottom: 2px solid #eee;
+}
+
+.admin-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+    color: #444;
+}
+
+.admin-table tbody tr:hover {
+    background-color: #fafafa;
+}
+
+/* Imagem pequenininha na tabela */
+.admin-prod-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: contain;
+    background-color: #f0f0f0;
+}
+
+.admin-prod-name {
+    font-weight: 600;
+    color: #4193ae;
+}
+
+/* Badges de Estoque */
+.admin-stock-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.admin-stock-badge.ok {
+    background-color: rgba(132, 179, 126, 0.15);
+    color: #84b37e;
+}
+
+.admin-stock-badge.low {
+    background-color: rgba(199, 119, 125, 0.15);
+    color: #c7777d; /* Rosa indicando atenção */
+}
+
+/* Botões de Ação na Tabela */
+.admin-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-edit-admin, .btn-delete-admin {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-edit-admin {
+    background-color: rgba(65, 147, 174, 0.1);
+    color: #4193ae; /* Azul */
+}
+
+.btn-edit-admin:hover {
+    background-color: #4193ae;
+    color: white;
+}
+
+.btn-delete-admin {
+    background-color: rgba(199, 119, 125, 0.1);
+    color: #c7777d; /* Rosa */
+}
+
+.btn-delete-admin:hover {
+    background-color: #c7777d;
+    color: white;
+}
+
+.admin-empty {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+    font-size: 1.1rem;
+}

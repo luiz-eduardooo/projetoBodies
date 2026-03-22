@@ -12,6 +12,7 @@ import MainPage from "./pages/MainPage";
 import { ProductCatalog } from "./components/ProductCatalog";
 import { CreateProduct } from "./components/CreateProduct";
 import { ProductDetails } from "./components/ProductDetails";
+import { AdminPanel } from "./components/AdminPanel";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/catalogo" element={<ProductCatalog />} />
           <Route path="/cadastroProduct" element={<CreateProduct />} />
           <Route path="/produto/:id" element={<ProductDetails />} />
+          <Route path="/admin" element={<AdminPanel/>}/>
         </Routes>
         
       </CartProvider>

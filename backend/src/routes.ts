@@ -13,14 +13,14 @@ import { webhookPedido, buscarPedido } from "./controllers/OrderControllers";
 
 const router = Router();
 const upload = multer(multerConfig);
-router.post("/products", upload.single("image"), createProduct);
-router.delete("/products/:id", authMiddleware, adminMiddleware, deletarProduto);
+router.post("/products", adminMiddleware, authMiddleware, upload.single("image"), createProduct);
+router.delete("/products/:id", adminMiddleware, authMiddleware, deletarProduto);
 router.get("/products", listarProdutos);
-router.put("/products/:id", authMiddleware, adminMiddleware, upload.single("image"), atualizarProduto);
+router.put("/products/:id", adminMiddleware, authMiddleware, upload.single("image"), atualizarProduto);
 router.post("/users", criarUsuario);
 router.post("/login", loginUsuario);
 router.get("/products/:id", buscarProdutoPorId);
-router.post("/orders", criarPedido)
+router.post("/orders", authMiddleware, criarPedido)
 // routes.ts
 router.post('/orders/webhook', webhookPedido);
 export default router;

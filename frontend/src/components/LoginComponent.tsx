@@ -23,7 +23,7 @@ export default function LoginComponent() {
       });
 
       const data = await response.json();
-
+      console.log(data)
       if (response.ok) {
         // A MÁGICA ACONTECE AQUI: 
         // Em vez de fazer o localStorage manual, chamamos a função do contexto.
@@ -32,11 +32,12 @@ export default function LoginComponent() {
           id: data.user.id,
           name: data.user.name,
           email: data.user.email,
-          token: data.token || '' // Passa o token se sua API retornar
+          role:data.user.role,
+          token: data.user.token, // Passa o token se sua API retornar
         });
         
         // Redireciona pra vitrine/catálogo
-        navigate('/catalogo');
+        navigate('/');
       } else {
         setErro(data.error || 'Erro ao fazer login');
       }
