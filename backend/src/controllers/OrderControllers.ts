@@ -8,7 +8,7 @@ import { item, orderItems, productVariant } from "../types/entityTypes";
 import { MercadoPagoConfig, Payment } from 'mercadopago';
 
 // 2. Inicializamos o cliente com o seu Token do Mercado Pago (que fica no .env)
-const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACESS_TOKEN as string });
+const client = new MercadoPagoConfig({ accessToken: process.env.MP_BLA as string });
 
 export const criarPedido = async (req: Request, res: Response) => {
     // 3. Recebemos os items E os dados de pagamento (formData) que o React vai mandar
