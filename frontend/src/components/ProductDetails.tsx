@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import type { Product } from '../types';
 import '../css/ProductDetails.css';
 
@@ -9,7 +10,7 @@ import { useCart } from '../context/CartContext';
 export function ProductDetails() {
   const { id } = useParams<{ id: string }>(); 
   const navigate = useNavigate();
-
+  const { isAuthenticated } = useAuth();
   // 2. Puxamos a função de adicionar ao carrinho lá da nossa nuvem
   const { addToCart } = useCart();
 
@@ -54,6 +55,13 @@ export function ProductDetails() {
   const precoFinal = product.discount > 0 ? product.discountedPrice : product.price;
 
   const handleAddToCart = () => {
+    // BLOQUEIO: Se não estiver logado, avisa e manda pro login!
+    if (!isAuthenticated) {
+      alert("Você precisa fazer login para adicionar produtos ao carrinho!");
+      navigate('/login');
+      return;
+    }
+
     if (!currentVariant) {
       alert("Por favor, selecione um tamanho.");
       return;
@@ -65,7 +73,7 @@ export function ProductDetails() {
       price: precoFinal,
       quantity: 1,
       imageUrl: product.imageUrl,
-      maxStock: currentVariant.stockQuantity // <-- SÓ ADICIONE ESTA LINHA AQUI!
+      maxStock: currentVariant.stockQuantity 
     });
   };
 

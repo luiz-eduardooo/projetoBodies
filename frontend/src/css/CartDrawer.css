@@ -146,3 +146,23 @@
 .checkout-btn:hover {
     background-color: #729c6d;
 }
+
+/* Estilo para o campo de digitar a quantidade */
+.cart-qtd-input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    font-weight: bold;
+    color: #4193ae; /* Azul Bereshit */
+    font-size: 16px;
+    outline: none;
+    -moz-appearance: textfield; /* Remove as setinhas no Firefox */
+    background: transparent;
+}
+
+/* Remove as setinhas no Chrome, Safari, Edge */
+.cart-qtd-input::-webkit-outer-spin-button,
+.cart-qtd-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

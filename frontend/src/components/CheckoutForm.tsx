@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { initMercadoPago, Payment } from '@mercadopago/sdk-react';
 import { useNavigate } from 'react-router-dom';
 import '../css/CheckOut.css';
+import { useCart } from '../context/CartContext';
 
 initMercadoPago(import.meta.env.VITE_MP_PUBLIC_KEY as string, { locale: 'pt-BR' });
 
@@ -20,7 +21,7 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
     ticket_url: string;
   } | null>(null);
   const [orderId, setOrderId] = useState<string | null>(null);
-
+  const {clearCart} = useCart();
   const initialization = { amount: totalAmount };
 
   const customization = {
@@ -69,8 +70,14 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
         return;
       }
 
+      // ==========================================
+      // A MÁGICA AQUI: O pedido foi criado no banco! 
+      // Já podemos esvaziar o carrinho com segurança.
+      // ==========================================
+      clearCart(); 
+
       if (data.qr_code_base64) {
-        setOrderId(data.order.id); // ← salva o id para o polling
+        setOrderId(data.order.id); 
         setMensagem('pix');
         setPixData({
           qr_code_base64: data.qr_code_base64,

@@ -47,7 +47,6 @@ export function ProductCatalog() {
   return (
     
     <div className="catalog-container">
-      <Header/>
       <h1 className="catalog-title">Coleção Bereshit</h1>
       
       {/* Nosso componente de Filtro lindão aqui */}

@@ -8,8 +8,11 @@ import { useAuth } from '../context/AuthContext';
 const Header = () => {
   // Puxando as informações do usuário da nossa "nuvem"
   const { user, isAuthenticated, logout } = useAuth();
-  const { itemCount, openCart } = useCart();
-
+  const { itemCount, openCart, clearCart } = useCart();
+  const handleSair = () => {
+    logout(); // Tira o usuário
+    clearCart(); // Esvazia o carrinho instantaneamente
+  };
   return (
     <div id="caixa">
       <header>
@@ -18,7 +21,7 @@ const Header = () => {
         <div id="containerHeader">
           {/* Se você usar React Router, o ideal é trocar <a href> por <Link to> */}
           <a href="/">Home</a>
-          <a href="/produtos">Produtos</a>
+          <a href="/catalogo">Produtos</a>
           <a href="/sobre">Sobre</a>
           <a href="/contato">Contato</a>
         </div>
@@ -33,12 +36,11 @@ const Header = () => {
           
           {/* LÓGICA DE AUTENTICAÇÃO AQUI */}
           {isAuthenticated ? (
-            // Se estiver logado, mostra o nome e o botão de sair COM TEXTO
             <div className="user-logged">
               <span className="user-name">Olá, {user?.name.split(' ')[0]}</span>
               
-              {/* Novo botão de Sair mais explícito */}
-              <div className="logout-btn-container" onClick={logout}>
+              {/* 3. Troque o onClick para a nova função que criamos */}
+              <div className="logout-btn-container" onClick={handleSair}>
                 <span className="material-symbols-outlined logout-icon">logout</span>
                 <span className="logout-text">Sair</span>
               </div>

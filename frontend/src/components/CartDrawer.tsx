@@ -85,10 +85,29 @@ export const CartDrawer = () => {
                   
                   <div className="item-actions">
                     <div className="quantity-control">
-                      <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</button>
-                      <span>{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
-                    </div>
+                    <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</button>
+                    
+                    {/* Trocamos o span por um input controlável */}
+                    <input 
+                      type="number"
+                      className="cart-qtd-input"
+                      value={item.quantity}
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value);
+                        if (!isNaN(val)) {
+                          updateQuantity(item.id, val);
+                        }
+                      }}
+                      onBlur={(e) => {
+                        // Se o cliente apagar tudo e sair do campo, volta pra 1
+                        if (!e.target.value || parseInt(e.target.value) <= 0) {
+                          updateQuantity(item.id, 1);
+                        }
+                      }}
+                    />
+                    
+                    <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
+                  </div>
                     <span 
                       className="material-symbols-outlined remove-btn"
                       onClick={() => removeFromCart(item.id)}
