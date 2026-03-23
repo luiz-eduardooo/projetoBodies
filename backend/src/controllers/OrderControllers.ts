@@ -7,6 +7,7 @@ import { ProductVariant } from "../entity/ProductVariant";
 import { item, orderItems, productVariant } from "../types/entityTypes";
 import crypto from 'crypto';
 import { MercadoPagoConfig, Order as MPOrder, Payment} from 'mercadopago';  // Comente Order
+import { enviarMensagemPedido } from '../services/whatsappService';
 // Use só ordersApi.create()
 const client = new MercadoPagoConfig({ accessToken: process.env.MP_BLA! });
 const ordersApi = new MPOrder(client);
@@ -110,6 +111,7 @@ console.log("É processed?", mpResponse.status === 'processed');
 }
             
             await orderRepository.save(order);
+            await enviarMensagemPedido(order);
         } else if (mpResponse.status === 'action_required') {
     // ← PIX entra aqui! Aguardando pagamento
     order.status = "PENDING";
@@ -257,6 +259,7 @@ export const webhookPedido = async (req: Request, res: Response) => {
             ) {
                 order.status = 'PAGO';
                 await orderRepository.save(order);
+                await enviarMensagemPedido(order);
                 console.log("6️⃣ PEDIDO ATUALIZADO PARA PAGO ✅");
             }
         } catch(e: any) {
