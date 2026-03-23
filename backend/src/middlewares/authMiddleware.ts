@@ -17,8 +17,10 @@ export const authMiddleware = async (req:Request, res:Response, next:NextFunctio
         if(!secret) {
             throw new Error("JWT_SECRET não definido no .env");
         }
-        const {id} = jwt.verify(token, secret) as {id:string};
-        const user = await AppDataSource.getRepository(User).findOneBy({ id });
+        const { userId } = jwt.verify(token, secret) as { userId: string };
+        
+        // 2. Busca no banco de dados comparando a coluna id com o userId que veio do token
+        const user = await AppDataSource.getRepository(User).findOneBy({ id: userId });
         if (!user) {
             return res.status(401).json({ error: "Usuário não encontrado" });
         }

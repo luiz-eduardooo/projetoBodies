@@ -1,65 +1,97 @@
+/* Container branco que abraça a pesquisa e os filtros */
 .filters-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center; /* Centraliza no eixo Y */
-  justify-content: flex-start;
-  gap: 24px;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Sombra elegante */
+    margin-bottom: 40px;
+    flex-wrap: wrap; /* Ajuda na responsividade */
 }
 
+/* O Campo de Pesquisa */
 .search-input {
-  flex: 1;
-  min-width: 200px;
-  max-width: 350px;
-  height: 42px; /* Forçamos uma altura fixa */
-  margin: 0; /* Mata qualquer margem fantasma do navegador */
-  padding: 0 15px; /* Padding apenas nas laterais agora */
-  border: 1px solid #ccc;
-  border-radius: 21px; /* Metade da altura para ficar redondinho */
-  outline: none;
-  font-family: inherit;
-  box-sizing: border-box; /* Garante que a borda não aumente o tamanho final */
-  transition: border-color 0.3s ease;
+    flex: 1;
+    min-width: 250px;
+    padding: 12px 25px;
+    border: 2px solid #eee;
+    border-radius: 30px; /* Arredondado estilo pílula */
+    font-size: 1rem;
+    font-family: 'Argue Demo', 'Inter', sans-serif;
+    color: #555;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #fcfcfc;
 }
 
+/* Efeito ao clicar para digitar */
 .search-input:focus {
-  border-color: #4193ae;
+    border-color: #84b37e; /* Verde Bereshit */
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(132, 179, 126, 0.15); /* "Aura" verde em volta */
 }
 
+/* Placeholder (O texto "Buscar coleção...") */
+.search-input::placeholder {
+    color: #aaa;
+}
+
+/* Container dos Botões de Tamanho */
 .size-filters {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  height: 42px; /* Mesma altura exata da barra de busca */
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap; /* Se não couber, joga pra linha de baixo */
 }
 
+/* Botões de Tamanho (Padrão/Inativo) */
 .size-btn {
-  height: 42px; /* Mesma altura exata */
-  margin: 0; /* Mata margens fantasmas */
-  padding: 0 16px;
-  border: 1px solid #84b37e;
-  background-color: transparent;
-  color: #84b37e;
-  border-radius: 21px;
-  cursor: pointer;
-  font-weight: bold;
-  white-space: nowrap;
-  box-sizing: border-box;
-  
-  /* Flexbox DENTRO do botão para o texto ficar perfeitamente no meio */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
+    background-color: transparent;
+    border: 2px solid #eee;
+    color: #777;
+    padding: 8px 18px;
+    border-radius: 8px; /* Quadrado com pontas suaves */
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Argue Demo', 'Inter', sans-serif;
 }
 
+/* Efeito ao passar o mouse */
 .size-btn:hover {
-  background-color: #f0f7f0;
+    border-color: #4193ae; /* Azul Bereshit */
+    color: #4193ae;
 }
 
+/* Botão Selecionado (Classe Active) */
 .size-btn.active {
-  background-color: #84b37e;
-  color: white;
+    background-color: #4193ae; /* Fundo Azul */
+    border-color: #4193ae;
+    color: white;
+    box-shadow: 0 4px 10px rgba(65, 147, 174, 0.3); /* Sombrinha azul */
+    transform: translateY(-2px); /* Efeito do botão levantadinho */
+}
+
+/* =========================================
+   RESPONSIVIDADE (CELULARES)
+   ========================================= */
+@media (max-width: 768px) {
+    .filters-container {
+        flex-direction: column; /* Coloca a pesquisa em cima e tamanhos embaixo */
+        align-items: stretch; /* Estica a barra para caber na tela toda */
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .size-filters {
+        justify-content: center; /* Centraliza os botõezinhos no celular */
+    }
+
+    .size-btn {
+        padding: 8px 15px; /* Botões levemente menores no mobile */
+    }
 }

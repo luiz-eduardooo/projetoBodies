@@ -71,17 +71,24 @@ export const createProduct = async (req: Request, res: Response) => {
 
 
 export const deletarProduto = async (req: Request, res: Response) => {
-    const {id} = req.params;
+    const { id } = req.params;
     const productRepository = AppDataSource.getRepository(Product);
+
     try {
-        const product = await productRepository.findOne({ where: { id: id as string}, relations: ["variants"] });
-        if (!product) return res.status(404).json({ error: "Produto não encontrado" });
-        await productRepository.remove(product);
-        res.status(200).json({ message: "Produto deletado com sucesso" });
+        // 1. Verificação de existência (usando apenas o ID para ser mais leve)
+        const product = await productRepository.findOneBy({ id: id as any });
+
+        if (!product) {
+            return res.status(404).json({ error: "Produto não encontrado" });
+        }
+        await productRepository.delete(id); 
+
+        return res.status(200).json({ message: "Produto deletado com sucesso" });
     } catch (error) {
-        res.status(500).json({ error: "Erro ao deletar produto" });
-    }   
-}
+        console.error("Erro ao deletar:", error); // Logar o erro ajuda no debug
+        return res.status(500).json({ error: "Erro interno ao deletar produto" });
+    } 
+};
 export const buscarProdutoPorId = async (req: Request, res: Response) => {
     const { id } = req.params;
     const productRepository = AppDataSource.getRepository(Product);

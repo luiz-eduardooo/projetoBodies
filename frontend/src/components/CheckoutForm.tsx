@@ -3,7 +3,7 @@ import { initMercadoPago, Payment } from '@mercadopago/sdk-react';
 import { useNavigate } from 'react-router-dom';
 import '../css/CheckOut.css';
 import { useCart } from '../context/CartContext';
-
+import { useAuth } from '../context/AuthContext';
 initMercadoPago(import.meta.env.VITE_MP_PUBLIC_KEY as string, { locale: 'pt-BR' });
 
 interface CheckoutProps {
@@ -23,6 +23,7 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
   const [orderId, setOrderId] = useState<string | null>(null);
   const {clearCart} = useCart();
   const initialization = { amount: totalAmount };
+  const {token} = useAuth()
 
   const customization = {
     paymentMethods: {
@@ -59,8 +60,11 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
 
       const response = await fetch('http://localhost:3000/orders', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify({ userId, items, paymentData: formData }),
+        
       });
 
       const data = await response.json();

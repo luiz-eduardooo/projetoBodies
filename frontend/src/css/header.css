@@ -168,3 +168,89 @@ header img:hover {
     box-shadow: 0 4px 10px rgba(132, 179, 126, 0.3);
     transform: translateY(-2px);
 }
+/* =========================================
+   ESTILOS DO MENU MOBILE
+   ========================================= */
+
+/* Esconde o menu hambúrguer no computador */
+.mobile-menu-icon {
+    display: none;
+    cursor: pointer;
+    color: #4193ae; /* Azul Bereshit */
+    transition: transform 0.2s;
+}
+
+.mobile-menu-icon span {
+    font-size: 32px;
+}
+
+/* RESPONSIVIDADE (Tablets e Celulares) */
+@media (max-width: 900px) {
+    header {
+        padding: 0 20px;
+    }
+
+    /* Mostra o ícone do Menu */
+    .mobile-menu-icon {
+        display: block;
+    }
+
+    /* Centraliza a logo no celular */
+    .logo-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        margin-left: 10px; /* Compensa o espaço do menu */
+    }
+
+    header img {
+        height: 40px; /* Logo um pouquinho menor na telinha */
+    }
+
+    /* Transforma o menu de links em um painel lateral/flutuante */
+    #containerHeader {
+        position: fixed;
+        top: 80px; /* Altura do header */
+        left: -100%; /* Começa escondido fora da tela */
+        width: 100%;
+        height: calc(100vh - 80px);
+        background-color: rgba(255, 255, 255, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        gap: 40px;
+        transition: left 0.4s ease-in-out;
+        z-index: 899;
+    }
+
+    /* Quando clicamos no ícone, ele ganha a classe 'open' e desliza pra tela */
+    #containerHeader.open {
+        left: 0;
+    }
+
+    /* Aumenta a fonte dos links no celular para facilitar o toque com o dedo */
+    #containerHeader a {
+        font-size: 1.5rem;
+    }
+
+    /* Ajustes na área do usuário para caber na tela */
+    #user {
+        gap: 15px;
+    }
+
+    .user-name {
+        display: none; /* Esconde o "Olá, Nome" no celular para poupar espaço */
+    }
+
+    .logout-text {
+        display: none; /* Esconde a palavra "Sair", fica só o ícone */
+    }
+
+    .logout-btn-container {
+        padding: 5px; /* Tira o fundo arredondado grandão */
+    }
+
+    .auth-buttons .login-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem; /* Botão de entrar levemente menor */
+    }
+}
