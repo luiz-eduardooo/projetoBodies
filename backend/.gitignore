@@ -1,43 +1,45 @@
-# Dependências
-node_modules/
-jspm_packages/
-
-# Builds e Saídas
-dist/
-build/
-out/
-.next/
-
-# Logs e Temporários
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-logs
-*.log
-tmp/
-temp/
-.turbo/
 
-# Variáveis de Ambiente (Segurança!)
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.env.*.local
+# Dependências e Build (Obrigatório!)
+node_modules/
+dist/
+build/
+out/
 
-# IDEs e Editores
-.idea/
+# Editor de Código / Sistema Operacional
 .vscode/
-*.swp
-*.swo
-.project
-.classpath
-.settings/
-
-# Sistema Operacional
+.idea/
 .DS_Store
 Thumbs.db
 
-# Testes
+# Variáveis de Ambiente e Chaves (Extrema Segurança!)
+.env
+.env.test
+.env.production
+*.pem
+*.key
+*.cert
+
+# Arquivos de Banco de Dados Locais (Se usar SQLite)
+*.sqlite
+*.sqlite3
+db.sqlite
+ormconfig.json.backup
+
+# Pasta de Uploads de Imagens (Para não subir os corpos de teste pro Git)
+uploads/
+tmp/
+temp/
+public/uploads/
+
+# Testes e Cobertura
 coverage/
+.nyc_output/
+
+# Caches do TypeScript
+*.tsbuildinfo

@@ -20,7 +20,7 @@ router.put("/products/:id", adminMiddleware, authMiddleware, upload.single("imag
 router.post("/users", criarUsuario);
 router.post("/login", loginUsuario);
 router.get("/products/:id", buscarProdutoPorId);
-router.post("/orders", authMiddleware, criarPedido)
+router.post("/orders", authMiddleware,criarPedido)
 // routes.ts
 router.post('/orders/webhook', webhookPedido);
 export default router;
