@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import * as yup from "yup";
+import { cpf as cpfValidator, cnpj as cnpjValidator } from "cpf-cnpj-validator";
 import { decryptData, encryptData } from "../middlewares/cryptoUtils";
 
 
@@ -13,10 +14,14 @@ const schema = yup.object().shape({
     password: yup.string().min(6, "A senha deve ter no mínimo 6 caracteres").required("A senha é obrigatória"),
     
     cpf: yup.string()
-        .required("O documento é obrigatório")
-        .test('cpf-ou-cnpj', 'Informe um CPF (11 dígitos) ou CNPJ (14 dígitos) válido',
-            (value) => value?.length === 11 || value?.length === 14
-        ),
+  .required("O documento é obrigatório")
+  .test('cpf-ou-cnpj', 'Informe um CPF ou CNPJ válido', (value) => {
+    if (!value) return false;
+    
+    if (value.length === 11) return cpfValidator.isValid(value);
+    if (value.length === 14) return cnpjValidator.isValid(value);
+    return false;
+  }),
 });
 
 
