@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "../css/header.css";
 import logoPng from "../img/logo.png";
 import { useAuth } from '../context/AuthContext'; 
 import { useCart } from '../context/CartContext';
 
 const Header = () => {
+  const navigate = useNavigate();
   const { user, isAuthenticated, logout } = useAuth();
   const { itemCount, openCart, clearCart } = useCart();
   
@@ -46,7 +47,13 @@ const Header = () => {
         <Link to="/catalogo" onClick={() => setIsMenuOpen(false)}>Produtos</Link>
         
         {/* Links que aparecem para todo mundo */}
-        <Link to="/sobre" onClick={() => setIsMenuOpen(false)}>Sobre Nós</Link>
+        <a onClick={() => {
+      setIsMenuOpen(false);
+      navigate('/');
+      setTimeout(() => {
+          document.getElementById('aboutSection')?.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+  }} style={{ cursor: 'pointer' }}>Sobre Nós</a>
         <Link to="/contato" onClick={() => setIsMenuOpen(false)}>Contato</Link>
         
         {/* A MÁGICA AQUI: O botão Painel só renderiza se o usuário for admin! */}
