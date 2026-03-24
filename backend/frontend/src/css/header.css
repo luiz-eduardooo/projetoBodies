@@ -1,0 +1,256 @@
+/* Importando as fontes caso você ainda não tenha no seu CSS global */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* O Header agora fica fixo no topo, com um fundo levemente translúcido */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px); /* Efeito de vidro fosco */
+    padding: 0 5%; /* Espaçamento lateral responsivo */
+    height: 80px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    font-family: 'Argue Demo', 'Inter', sans-serif;
+}
+
+/* Ajuste fino na logo para ela brilhar */
+header img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+header img:hover {
+    transform: scale(1.05);
+}
+
+/* Área central de Links */
+#containerHeader {
+    display: flex;
+    gap: 40px; /* Distância exata e elegante entre os links */
+    align-items: center;
+}
+
+#containerHeader a {
+    color: #4193ae; /* Azul Bereshit */
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+/* Efeito da linha verde crescendo embaixo do link (Luxo!) */
+#containerHeader a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #84b37e; /* Verde Bereshit */
+    transition: width 0.3s ease;
+}
+
+#containerHeader a:hover {
+    color: #84b37e;
+}
+
+#containerHeader a:hover::after {
+    width: 100%;
+}
+
+/* Área do usuário (Carrinho, Login e Sair) */
+#user {
+    display: flex;
+    align-items: center;
+    gap: 25px; /* Separa os ícones de forma harmoniosa */
+}
+
+/* Ícone do Carrinho */
+.cart-icon-container {
+    position: relative;
+    cursor: pointer;
+    color: #4193ae; 
+    transition: transform 0.2s ease, color 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.cart-icon-container:hover {
+    color: #84b37e;
+    transform: translateY(-2px); /* Dá um pulinho suave */
+}
+
+.cart-icon {
+    font-size: 30px;
+}
+
+/* Bolinha do Carrinho */
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background-color: #c7777d; /* Rosa Bereshit (Destaque) */
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    height: 20px;
+    min-width: 20px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 6px;
+    border: 2px solid white; /* Borda branca pra dar contraste com o ícone */
+}
+
+/* Nome do Usuário */
+.user-logged {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-name {
+    color: #84b37e;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* Botão de Sair */
+.logout-btn-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    color: #c7777d; 
+    padding: 5px 12px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.logout-btn-container:hover {
+    background-color: #fdf2f3; /* Fundo rosinha bem claro */
+    color: #a0575d;
+}
+
+.logout-icon {
+    font-size: 22px;
+}
+
+.logout-text {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* Botão de Entrar (Quando não está logado) */
+.auth-buttons .login-btn {
+    background-color: #4193ae; /* Azul Bereshit */
+    color: white;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(65, 147, 174, 0.3);
+}
+
+.auth-buttons .login-btn:hover {
+    background-color: #84b37e; /* Verde Bereshit */
+    box-shadow: 0 4px 10px rgba(132, 179, 126, 0.3);
+    transform: translateY(-2px);
+}
+/* =========================================
+   ESTILOS DO MENU MOBILE
+   ========================================= */
+
+/* Esconde o menu hambúrguer no computador */
+.mobile-menu-icon {
+    display: none;
+    cursor: pointer;
+    color: #4193ae; /* Azul Bereshit */
+    transition: transform 0.2s;
+}
+
+.mobile-menu-icon span {
+    font-size: 32px;
+}
+
+/* RESPONSIVIDADE (Tablets e Celulares) */
+@media (max-width: 900px) {
+    header {
+        padding: 0 20px;
+    }
+
+    /* Mostra o ícone do Menu */
+    .mobile-menu-icon {
+        display: block;
+    }
+
+    /* Centraliza a logo no celular */
+    .logo-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        margin-left: 10px; /* Compensa o espaço do menu */
+    }
+
+    header img {
+        height: 40px; /* Logo um pouquinho menor na telinha */
+    }
+
+    /* Transforma o menu de links em um painel lateral/flutuante */
+    #containerHeader {
+        position: fixed;
+        top: 80px; /* Altura do header */
+        left: -100%; /* Começa escondido fora da tela */
+        width: 100%;
+        height: calc(100vh - 80px);
+        background-color: rgba(255, 255, 255, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        gap: 40px;
+        transition: left 0.4s ease-in-out;
+        z-index: 899;
+    }
+
+    /* Quando clicamos no ícone, ele ganha a classe 'open' e desliza pra tela */
+    #containerHeader.open {
+        left: 0;
+    }
+
+    /* Aumenta a fonte dos links no celular para facilitar o toque com o dedo */
+    #containerHeader a {
+        font-size: 1.5rem;
+    }
+
+    /* Ajustes na área do usuário para caber na tela */
+    #user {
+        gap: 15px;
+    }
+
+    .user-name {
+        display: none; /* Esconde o "Olá, Nome" no celular para poupar espaço */
+    }
+
+    .logout-text {
+        display: none; /* Esconde a palavra "Sair", fica só o ícone */
+    }
+
+    .logout-btn-container {
+        padding: 5px; /* Tira o fundo arredondado grandão */
+    }
+
+    .auth-buttons .login-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem; /* Botão de entrar levemente menor */
+    }
+}

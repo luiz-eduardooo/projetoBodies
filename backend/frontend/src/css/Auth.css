@@ -1,0 +1,120 @@
+/* Container que centraliza o formulário na tela */
+.auth-container {
+    max-width: 450px; /* Largura ideal para formulários não ficarem esticados */
+    margin: 80px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08); /* Sombra elegante e profunda */
+    font-family: 'Argue Demo', 'Inter', sans-serif;
+    text-align: center;
+}
+
+/* Título (Login ou Criar Conta) */
+.auth-title {
+    font-family: 'Glimmer of Light', serif;
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    color: #4193ae; /* Azul padrão */
+}
+
+.auth-title.green {
+    color: #84b37e; /* Verde Bereshit (como você definiu no componente!) */
+}
+
+/* Mensagem de Erro (Estilosa e sem quebrar o layout) */
+.auth-error {
+    background-color: #fdf2f3; /* Fundo rosinha bem claro */
+    color: #c7777d; /* Rosa Bereshit */
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid #f8dce0;
+}
+
+/* Organização dos campos */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaço perfeito entre os inputs */
+}
+
+/* Campos de digitação (Inputs) */
+.auth-input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    background-color: #fcfcfc;
+}
+
+/* Efeito ao clicar para digitar */
+.auth-input:focus {
+    border-color: #84b37e; /* Borda Verde */
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(132, 179, 126, 0.15); /* Aura verde em volta */
+}
+
+.auth-input::placeholder {
+    color: #aaa;
+}
+
+/* Botão de Ação (Entrar ou Cadastrar) */
+.auth-button {
+    width: 100%;
+    padding: 16px;
+    background-color: #84b37e; /* Verde Bereshit */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(132, 179, 126, 0.3); /* Sombra verde */
+}
+
+.auth-button:hover {
+    background-color: #6d9c67;
+    transform: translateY(-2px); /* Efeito do botão pulando */
+}
+
+/* Rodapé (Link para a outra tela) */
+.auth-footer {
+    margin-top: 25px;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.auth-link {
+    color: #4193ae; /* Azul Bereshit */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.auth-link:hover {
+    color: #c7777d; /* Fica Rosa/Goiaba ao passar o mouse */
+    text-decoration: underline;
+}
+
+/* =========================================
+   RESPONSIVIDADE (CELULARES)
+   ========================================= */
+@media (max-width: 500px) {
+    .auth-container {
+        margin: 40px 20px; /* Adapta a margem pra telas menores */
+        padding: 30px 20px;
+    }
+    .auth-title {
+        font-size: 2.2rem;
+    }
+}

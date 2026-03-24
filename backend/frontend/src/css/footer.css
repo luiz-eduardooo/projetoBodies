@@ -1,0 +1,119 @@
+/* Container principal do Footer */
+.footer-container {
+    background-color: #4193ae; /* Azul Bereshit como âncora visual */
+    color: #ffffff;
+    padding: 60px 5% 20px;
+    font-family: 'Argue Demo', 'Inter', sans-serif;
+    margin-top: 50px; /* Dá um respiro entre o conteúdo da página e o rodapé */
+}
+
+/* Área das colunas */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Permite quebrar linha no celular */
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Linha divisória sutil */
+}
+
+/* Estilo individual de cada coluna */
+.footer-column {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.brand-column {
+    flex: 1.5; /* A coluna da marca fica um pouco mais larga */
+}
+
+.footer-logo {
+    width: 180px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    /* Filtro para deixar a logo branca caso ela seja escura originalmente */
+    filter: brightness(0) invert(1); 
+}
+
+.brand-description {
+    line-height: 1.6;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Títulos das colunas */
+.footer-column h3 {
+    font-family: 'Glimmer of Light', serif;
+    font-size: 1.6rem;
+    color: #cbca76; /* Amarelo/Mostarda para dar destaque */
+    margin-bottom: 10px;
+}
+
+/* Links do Footer */
+.footer-column a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+    width: fit-content;
+}
+
+.footer-column a:hover {
+    color: #cbca76; /* Amarelo no hover */
+    transform: translateX(5px); /* Efeito de deslizar um pouquinho para o lado */
+}
+
+/* Informações de contato com ícones */
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-info span {
+    color: #84b37e; /* Verde Bereshit nos ícones */
+    font-size: 20px;
+}
+
+.contact-info p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Área de Copyright no final */
+.footer-copyright {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 20px auto 0;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.footer-credits {
+    font-style: italic;
+}
+
+/* =========================================
+   RESPONSIVIDADE (CELULARES E TABLETS)
+   ========================================= */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .footer-copyright {
+        flex-direction: column;
+        text-align: center;
+    }
+}

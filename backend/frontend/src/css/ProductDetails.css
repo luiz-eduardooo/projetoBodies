@@ -1,0 +1,246 @@
+/* Container que centraliza tudo */
+.details-container {
+    max-width: 1200px; /* Alinhado com a largura do catálogo */
+    margin: 40px auto 80px;
+    padding: 0 20px;
+    font-family: 'Argue Demo', 'Inter', sans-serif;
+}
+
+/* Botão de Voltar */
+.btn-back {
+    background: none;
+    border: none;
+    color: #4193ae; /* Azul Bereshit */
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 25px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s ease;
+}
+
+.btn-back:hover {
+    color: #c7777d; /* Rosa/Goiaba no hover */
+}
+
+/* Caixão principal branca que envolve a foto e os textos */
+.product-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05); /* Sombra luxuosa */
+    padding: 30px;
+}
+
+@media (min-width: 900px) {
+    .product-layout {
+        flex-direction: row; /* Lado a lado no PC */
+        padding: 40px;
+    }
+}
+
+/* =========================================
+   ÁREA DA IMAGEM
+   ========================================= */
+.product-image-section {
+    flex: 1;
+    position: relative;
+    background-color: #f7f9f8; /* Fundo suave */
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-height: 400px;
+}
+
+.main-image {
+    width: 100%;
+    height: 100%;
+    max-height: 550px;
+    object-fit: contain; /* Garante que a roupa não fique cortada */
+}
+
+/* Selo de Desconto */
+.discount-badge-large {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #cbca76; /* Mostarda */
+    color: white;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    z-index: 2;
+    box-shadow: 0 4px 10px rgba(203, 202, 118, 0.3);
+}
+
+/* =========================================
+   ÁREA DE INFORMAÇÕES E COMPRA
+   ========================================= */
+.product-info-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.details-title {
+    color: #84b37e; /* Verde Bereshit */
+    font-family: 'Glimmer of Light', serif;
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.details-description {
+    color: #666;
+    line-height: 1.6;
+    font-size: 1.05rem;
+    margin-bottom: 25px;
+}
+
+/* Preços */
+.details-price {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee; /* Linha sutil separando o preço das opções */
+}
+
+.details-price .old-price {
+    font-size: 1.2rem;
+    color: #a0a0a0;
+    text-decoration: line-through;
+}
+
+.details-price .new-price {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #4193ae; /* Azul Bereshit no preço final */
+}
+
+/* =========================================
+   BOTÕES DE COR E TAMANHO
+   ========================================= */
+.selection-area {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.variant-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.variant-label {
+    color: #555;
+    font-size: 1rem;
+}
+
+.variant-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* Design dos botõezinhos (Igual ao do filtro pra manter padrão) */
+.variant-btn {
+    padding: 10px 20px;
+    border: 2px solid #eee;
+    background: #fcfcfc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+    color: #666;
+    font-family: 'Inter', sans-serif;
+}
+
+.variant-btn:hover:not(:disabled) {
+    border-color: #4193ae;
+    color: #4193ae;
+}
+
+/* Quando o cliente clica e seleciona o tamanho/cor */
+.variant-btn.active {
+    border-color: #4193ae;
+    background-color: #4193ae;
+    color: white;
+    box-shadow: 0 4px 10px rgba(65, 147, 174, 0.2);
+}
+
+/* Quando não tem no estoque */
+.variant-btn.out-of-stock {
+    opacity: 0.4;
+    cursor: not-allowed;
+    text-decoration: line-through;
+    background: #f0f0f0;
+}
+
+/* Aviso de Estoque (Verde ou Rosa) */
+.stock-info {
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 10px 15px;
+    border-radius: 8px;
+    display: inline-block;
+    width: fit-content;
+}
+
+.stock-info.in-stock { 
+    background-color: rgba(132, 179, 126, 0.1); /* Fundo verdinho claro */
+    color: #84b37e; 
+}
+.stock-info.low-stock { 
+    background-color: rgba(199, 119, 125, 0.1); /* Fundo rosinha claro */
+    color: #c7777d; 
+}
+
+/* =========================================
+   BOTÃO DE ADICIONAR AO CARRINHO
+   ========================================= */
+.btn-add-cart {
+    padding: 18px;
+    background-color: #84b37e; /* Verde Bereshit */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(132, 179, 126, 0.3); /* Sombra verde */
+    margin-top: auto; /* Empurra o botão pro final do card */
+}
+
+.btn-add-cart:hover:not(:disabled) {
+    background-color: #6d9c67;
+    transform: translateY(-2px);
+}
+
+.btn-add-cart:disabled {
+    background-color: #cccccc;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Loading e Erro */
+.loading, .error-msg {
+    text-align: center;
+    padding: 100px 20px;
+    font-size: 1.2rem;
+    color: #666;
+}

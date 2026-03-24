@@ -1,0 +1,45 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependências e Build (Obrigatório!)
+node_modules/
+dist/
+build/
+out/
+
+# Editor de Código / Sistema Operacional
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Variáveis de Ambiente e Chaves (Extrema Segurança!)
+.env
+.env.test
+.env.production
+*.pem
+*.key
+*.cert
+
+# Arquivos de Banco de Dados Locais (Se usar SQLite)
+*.sqlite
+*.sqlite3
+db.sqlite
+ormconfig.json.backup
+
+# Pasta de Uploads de Imagens (Para não subir os corpos de teste pro Git)
+uploads/
+tmp/
+temp/
+public/uploads/
+
+# Testes e Cobertura
+coverage/
+.nyc_output/
+
+# Caches do TypeScript
+*.tsbuildinfo
