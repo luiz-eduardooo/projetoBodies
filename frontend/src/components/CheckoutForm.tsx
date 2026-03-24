@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { initMercadoPago, Payment } from '@mercadopago/sdk-react';
 import { useNavigate } from 'react-router-dom';
 import '../css/CheckOut.css';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+
 initMercadoPago(import.meta.env.VITE_MP_PUBLIC_KEY as string, { locale: 'pt-BR' });
 
 interface CheckoutProps {
@@ -21,9 +22,10 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
     ticket_url: string;
   } | null>(null);
   const [orderId, setOrderId] = useState<string | null>(null);
-  const {clearCart} = useCart();
+  const { clearCart } = useCart();
+  const { token } = useAuth();
   const initialization = { amount: totalAmount };
-  const {token} = useAuth()
+  const aprovado = useRef(false); // ← evita disparar clearCart mais de uma vez
 
   const customization = {
     paymentMethods: {
@@ -40,10 +42,11 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
         const res = await fetch(`http://localhost:3000/orders/${orderId}`);
         const order = await res.json();
 
-        if (order.status === 'PAGO') {
+        if (order.status === 'PAGO' && !aprovado.current) {
+          aprovado.current = true;       // ← trava para não executar duas vezes
           clearInterval(intervalo);
           setPixData(null);
-          setMensagem('cartao'); 
+          setMensagem('cartao');         // ← NÃO limpa o carrinho aqui!
         }
       } catch (e) {
         console.error("Erro ao verificar status do pedido:", e);
@@ -59,11 +62,11 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
 
       const response = await fetch('http://localhost:3000/orders', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json',
+        headers: {
+          'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ userId, items, paymentData: formData }),
-        
       });
 
       const data = await response.json();
@@ -73,10 +76,9 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
         return;
       }
 
-      clearCart(); 
-
       if (data.qr_code_base64) {
-        setOrderId(data.order.id); 
+        aprovado.current = false; // ← reseta para nova tentativa
+        setOrderId(data.order.id);
         setMensagem('pix');
         setPixData({
           qr_code_base64: data.qr_code_base64,
@@ -84,7 +86,7 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
           ticket_url: data.ticket_url,
         });
       } else {
-        setMensagem('cartao');
+        setMensagem('cartao'); // cartão aprovado direto
       }
 
     } catch (error) {
@@ -95,10 +97,13 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
   const onError = async (error: any) => console.error("Erro Brick:", error);
   const onReady = async () => console.log('Brick carregado!');
 
+  // ← clearCart() só acontece aqui, quando usuário clica "Nova compra"
   const resetar = () => {
+    clearCart();
     setMensagem('');
     setPixData(null);
     setOrderId(null);
+    aprovado.current = false;
     navigate('/catalogo');
   };
 
@@ -110,7 +115,6 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
       </div>
     );
   }
-
 
   if (mensagem === 'pix' && pixData) {
     return (
@@ -157,7 +161,6 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
     );
   }
 
-
   if (mensagem) {
     return (
       <div className="checkout-mensagem">
@@ -165,7 +168,6 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
       </div>
     );
   }
-
 
   return (
     <div className="checkout-form">

@@ -62,6 +62,11 @@ export const criarPedido = async (req: Request, res: Response) => {
   external_reference: `order_${order.id}`,
   total_amount: Number(total).toFixed(2), 
   payer: paymentData.payer,  
+//   payer: {
+//     email: paymentData.payer?.email || user.email,
+//     first_name: "APRO", // ← FORÇA APROVAÇÃO NO SANDBOX
+//     last_name: paymentData.payer?.last_name || "Teste"
+//   },
   transactions: {
     payments: [{
 
@@ -222,46 +227,60 @@ export const atualizarStatusPedido = async (req: Request, res: Response) => {
 
 
 export const webhookPedido = async (req: Request, res: Response) => {
-  
-    const body = req.body instanceof Buffer 
-        ? JSON.parse(req.body.toString()) 
-        : req.body;
+  const body = req.body instanceof Buffer 
+    ? JSON.parse(req.body.toString()) 
+    : req.body;
 
-    const { type, data } = body;
-    console.log("1️⃣ WEBHOOK RECEBIDO:", type, data);
+  const { type, data } = body;
+  console.log("1️⃣ WEBHOOK RECEBIDO:", type, data);
 
-    if (type === 'payment') {
-        try {
-            const paymentApi = new Payment(client);
-            const pagamento = await paymentApi.get({ id: data.id });
-            console.log("2️⃣ PAGAMENTO STATUS:", pagamento.status);
-            console.log("3️⃣ EXTERNAL REF:", pagamento.external_reference);
+  // ← TROCA: era 'payment', agora é 'order'
+  if (type === 'order') {
+    try {
+      const orderRepository = AppDataSource.getRepository(Order);
+      const variantRepository = AppDataSource.getRepository(ProductVariant);
 
-            const localOrderId = pagamento.external_reference?.replace('order_', '');
-            console.log("4️⃣ LOCAL ORDER ID:", localOrderId);
+      // O próprio body já traz os dados da order!
+      const mpOrder = data;
+      console.log("2️⃣ ORDER STATUS:", mpOrder.status);
+      console.log("3️⃣ EXTERNAL REF:", mpOrder.external_reference);
 
-            const orderRepository = AppDataSource.getRepository(Order);
-            const variantRepository = AppDataSource.getRepository(ProductVariant);
+      if (mpOrder.status !== 'processed') {
+        return res.status(200).send('OK'); // ignora versões intermediárias
+      }
 
-            const order = await orderRepository.findOne({
-                where: { id: localOrderId },
-                relations: ["items", "items.variant"]
-            });
-            console.log("5️⃣ ORDER ENCONTRADA:", order?.id, "STATUS:", order?.status);
+      const localOrderId = mpOrder.external_reference?.replace('order_', '');
+      console.log("4️⃣ LOCAL ORDER ID:", localOrderId);
 
-            if (order && order.status !== 'PAGO'
-                && pagamento.status === 'approved'
-            ) {
-                order.status = 'PAGO';
-                await orderRepository.save(order);
-                await enviarMensagemPedido(order);
-                console.log("6️⃣ PEDIDO ATUALIZADO PARA PAGO ✅");
-            }
-        } catch(e: any) {
-            console.log("❌ ERRO NO WEBHOOK:", e?.message || e);
+      const order = await orderRepository.findOne({
+        where: { id: localOrderId },
+        relations: ["items", "items.variant", "items.variant.product", "user"]
+      });
+      console.log("5️⃣ ORDER ENCONTRADA:", order?.id, "STATUS:", order?.status);
+
+      if (order && order.status !== 'PAGO') {
+        // Baixa estoque
+        for (const item of order.items) {
+          const variant = await variantRepository.findOne({
+            where: { id: item.variant.id }
+          });
+          if (variant) {
+            variant.stockQuantity -= item.quantity;
+            await variantRepository.save(variant);
+          }
         }
+
+        order.status = 'PAGO';
+        await orderRepository.save(order);
+        await enviarMensagemPedido(order);
+        console.log("6️⃣ PEDIDO ATUALIZADO PARA PAGO ✅");
+      }
+    } catch(e: any) {
+      console.log("❌ ERRO NO WEBHOOK:", e?.message || e);
     }
-    res.status(200).send('OK');
+  }
+
+  res.status(200).send('OK');
 };
 
 export const buscarPedido = async (req: Request, res: Response) => {

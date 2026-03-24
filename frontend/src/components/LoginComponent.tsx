@@ -23,7 +23,6 @@ export default function LoginComponent() {
       });
 
       const data = await response.json();
-      console.log(data)
       if (response.ok) {
         // A MÁGICA ACONTECE AQUI: 
         // Em vez de fazer o localStorage manual, chamamos a função do contexto.
