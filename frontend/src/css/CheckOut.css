@@ -39,3 +39,94 @@
 .checkout-mensagem button:hover {
   background: #6fa068;
 }
+
+/* ← VIP: paleta Bereshit, sem roxo */
+.checkout-vip-box {
+  text-align: center;
+  padding: 30px 20px;
+  background: #e8f4f8; /* ← azul claro Bereshit */
+  border-radius: 12px;
+  border: 2px dashed #4193ae; /* ← azul Bereshit */
+}
+
+.checkout-vip-box p {
+  color: #555;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.checkout-vip-box p:first-child {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #4193ae; /* ← azul Bereshit */
+}
+
+.checkout-whatsapp-btn {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 14px 28px;
+  background-color: #84b37e; /* ← verde Bereshit */
+  color: white;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(132, 179, 126, 0.3); /* ← sombra verde */
+}
+
+.checkout-whatsapp-btn:hover {
+  background-color: #6fa068;
+  transform: translateY(-2px);
+}
+
+.pix-copia {
+  margin-top: 16px;
+  text-align: left;
+}
+
+.pix-copia label {
+  font-size: 0.9rem;
+  color: #555;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.pix-copia-input {
+  display: flex;
+  gap: 8px;
+}
+
+.pix-copia-input input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #555;
+  background: #fcfcfc;
+  outline: none;
+}
+
+.pix-copia-input button {
+  padding: 10px 16px;
+  background: #4193ae; /* ← azul Bereshit */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.pix-copia-input button:hover {
+  background: #317a94;
+}
+
+.pix-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #4193ae;
+  font-size: 0.9rem;
+  text-decoration: underline;
+}

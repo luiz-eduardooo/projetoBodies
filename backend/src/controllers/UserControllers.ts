@@ -12,8 +12,11 @@ const schema = yup.object().shape({
     email: yup.string().email("E-mail inválido").required("O e-mail é obrigatório"),
     password: yup.string().min(6, "A senha deve ter no mínimo 6 caracteres").required("A senha é obrigatória"),
     
-    cpf: yup.string().length(11, "O CPF deve ter 11 dígitos (apenas números)").required("O CPF é obrigatório"),
-    phone: yup.string().min(10, "Telefone inválido").required("O telefone é obrigatório")
+    cpf: yup.string()
+        .required("O documento é obrigatório")
+        .test('cpf-ou-cnpj', 'Informe um CPF (11 dígitos) ou CNPJ (14 dígitos) válido',
+            (value) => value?.length === 11 || value?.length === 14
+        ),
 });
 
 
@@ -29,9 +32,10 @@ export const criarUsuario = async (req: Request, res: Response) => {
         if (existingUser) {
             return res.status(400).json({ error: "Email já está em uso" });
         }
-        if(existingCpf){
-            return res.status(400).json({error: "Cpf ja está em uso"})
-        }
+        if (existingCpf) return res.status(400).json({ 
+            error: `${cpf.length === 11 ? 'CPF' : 'CNPJ'} já está em uso` 
+        });
+
         if(existingPhone){
             return res.status(400).json({error:"Telefone ja está em uso!"})
         }

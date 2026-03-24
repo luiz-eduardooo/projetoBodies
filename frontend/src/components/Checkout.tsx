@@ -9,6 +9,8 @@ export function Checkout() {
   const { cart, cartTotal } = useCart();
   const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
+  const LIMITE_VIP = 10000;
+  const WHATSAPP_LOJA = '553299875202'; // ← número da loja com DDI+DDD
 
   useEffect(() => {
 
@@ -32,6 +34,14 @@ export function Checkout() {
   }, [cart]);
 
   const firstName = user?.name?.split(' ')[0] || 'Cliente';
+
+  const mensagemWhats = encodeURIComponent(
+  `Olá! Tenho um pedido de R$ ${cartTotal.toFixed(2)} e gostaria de combinar o pagamento.\n\n` +
+  cart.map(item => `• ${item.name} x${item.quantity} — R$ ${(item.price * item.quantity).toFixed(2)}`).join('\n') +
+  `\n\n*Total: R$ ${cartTotal.toFixed(2)}*`
+);
+
+const linkWhatsapp = `https://wa.me/${WHATSAPP_LOJA}?text=${mensagemWhats}`;
 
 
   if (!isAuthenticated || !user || cart.length === 0) return null;
@@ -74,17 +84,36 @@ export function Checkout() {
           </div>
         </div>
         <div className="checkout-payment-box">
-          <h2>Pagamento</h2>
-          <p className="payment-subtitle">Escolha como deseja pagar através do Mercado Pago. A confirmação é imediata.</p>
+  <h2>Pagamento</h2>
 
-          <div className="mp-container">
-            <CheckoutForm
-                userId={user.id}
-                items={formattedCheckoutItems}
-                totalAmount={cartTotal}
-            />
-          </div>
-        </div>
+  {cartTotal >= LIMITE_VIP ? (
+    // ← Acima de 10k: redireciona pro WhatsApp
+    <div className="checkout-vip-box">
+      <p>👑 Seu pedido é especial!</p>
+      <p>Para compras acima de R$ 10.000, nosso time irá te atender pessoalmente para combinar a melhor forma de pagamento.</p>
+      <a
+        href={linkWhatsapp}
+        target="_blank"
+        rel="noreferrer"
+        className="checkout-whatsapp-btn"
+      >
+        💬 Falar com a loja pelo WhatsApp
+      </a>
+    </div>
+  ) : (
+    // ← Abaixo de 10k: fluxo normal do MP
+    <>
+      <p className="payment-subtitle">Escolha como deseja pagar através do Mercado Pago.</p>
+      <div className="mp-container">
+        <CheckoutForm
+          userId={user.id}
+          items={formattedCheckoutItems}
+          totalAmount={cartTotal}
+        />
+      </div>
+    </>
+  )}
+</div>
 
       </div>
     </div>
