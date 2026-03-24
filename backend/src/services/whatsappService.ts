@@ -31,6 +31,7 @@ export const enviarMensagemPedido = async (order: Order) => {
         html: `
             <h2>Novo pedido recebido!</h2>
             <p><b>Cliente:</b> ${order.user.name}</p>
+            <p><b>Telefone:</b> ${order.user.phone}
             <p><b>Email:</b> ${order.user.email}</p>
             <p><b>CPF:</b> ${cpfLegivel}</p>
             <p><b>Total:</b> R$ ${Number(order.total).toFixed(2)}</p>
