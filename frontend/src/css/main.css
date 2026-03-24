@@ -2,7 +2,7 @@
 #mainContent {
     width: 100%;
     overflow-x: hidden;
-    font-family: 'Argue Demo', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* =========================================
@@ -44,7 +44,7 @@
 }
 
 #textContent h1 {
-    font-family: 'Glimmer of Light', serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 3.5rem;
     color: #4193ae; /* Azul */
     margin-bottom: 15px;
@@ -86,7 +86,7 @@
 }
 
 .section-title {
-    font-family: 'Glimmer of Light', serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 2.8rem;
     color: #84b37e;
     margin-bottom: 10px;
@@ -183,7 +183,7 @@
 }
 
 .about-text h2 {
-    font-family: 'Glimmer of Light', serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 3rem;
     color: #c7777d; /* Rosa */
     margin-bottom: 25px;
@@ -197,7 +197,7 @@
 }
 
 .about-highlight {
-    font-family: 'Glimmer of Light', serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 2rem;
     color: #4193ae; /* Azul */
     margin-top: 30px;
