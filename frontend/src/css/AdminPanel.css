@@ -1,4 +1,4 @@
-/* Container principal */
+
 .admin-container {
     max-width: 1200px;
     margin: 40px auto;
@@ -6,7 +6,6 @@
     font-family: 'Argue Demo', 'Inter', sans-serif;
 }
 
-/* Cabeçalho do Painel */
 .admin-header {
     display: flex;
     justify-content: space-between;
@@ -19,7 +18,7 @@
 .admin-title {
     font-family: 'Glimmer of Light', serif;
     font-size: 2.5rem;
-    color: #4193ae; /* Azul */
+    color: #4193ae; 
     margin: 0 0 5px 0;
 }
 
@@ -29,9 +28,9 @@
     font-size: 1rem;
 }
 
-/* Botão de Adicionar */
+
 .btn-add-new {
-    background-color: #84b37e; /* Verde */
+    background-color: #84b37e;
     color: white;
     border: none;
     padding: 12px 25px;
@@ -48,12 +47,11 @@
     transform: translateY(-2px);
 }
 
-/* Tabela */
 .admin-table-wrapper {
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    overflow-x: auto; /* Permite rolar a tabela no celular */
+    overflow-x: auto; 
 }
 
 .admin-table {
@@ -81,7 +79,7 @@
     background-color: #fafafa;
 }
 
-/* Imagem pequenininha na tabela */
+
 .admin-prod-img {
     width: 50px;
     height: 50px;
@@ -95,7 +93,7 @@
     color: #4193ae;
 }
 
-/* Badges de Estoque */
+
 .admin-stock-badge {
     padding: 5px 12px;
     border-radius: 20px;
@@ -110,10 +108,9 @@
 
 .admin-stock-badge.low {
     background-color: rgba(199, 119, 125, 0.15);
-    color: #c7777d; /* Rosa indicando atenção */
+    color: #c7777d; 
 }
 
-/* Botões de Ação na Tabela */
 .admin-actions {
     display: flex;
     gap: 10px;
@@ -131,7 +128,7 @@
 
 .btn-edit-admin {
     background-color: rgba(65, 147, 174, 0.1);
-    color: #4193ae; /* Azul */
+    color: #4193ae;
 }
 
 .btn-edit-admin:hover {
@@ -141,7 +138,7 @@
 
 .btn-delete-admin {
     background-color: rgba(199, 119, 125, 0.1);
-    color: #c7777d; /* Rosa */
+    color: #c7777d;
 }
 
 .btn-delete-admin:hover {

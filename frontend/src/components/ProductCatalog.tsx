@@ -3,7 +3,6 @@ import type { Product } from '../types';
 import { ProductFilters } from './ProductFilters';
 import '../css/ProductCatalog.css';
 import { useNavigate } from 'react-router-dom';
-import Header from './Header';
 
 export function ProductCatalog() {
   const [products, setProducts] = useState<Product[]>([]);

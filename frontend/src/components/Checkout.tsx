@@ -1,0 +1,92 @@
+import { useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
+import '../css/CheckOutPage.css';
+import { CheckoutForm } from './CheckoutForm';
+
+export function Checkout() {
+  const { cart, cartTotal } = useCart();
+  const { isAuthenticated, user } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+
+    if (!isAuthenticated || !user) {
+      alert("Você precisa fazer login para finalizar a compra!");
+      navigate('/login', { state: { from: '/checkout' } });
+    }
+
+    else if (cart.length === 0) {
+      alert("Seu carrinho está vazio.");
+      navigate('/catalogo');
+    }
+  }, [isAuthenticated, user, cart, navigate]);
+
+
+  const formattedCheckoutItems = useMemo(() => {
+    return cart.map(item => ({
+      variantId: item.id, 
+      quantity: item.quantity
+    }));
+  }, [cart]);
+
+  const firstName = user?.name?.split(' ')[0] || 'Cliente';
+
+
+  if (!isAuthenticated || !user || cart.length === 0) return null;
+
+  return (
+    <div className="checkout-page">
+      <div className="checkout-header">
+        <h1>Finalizar Compra</h1>
+        <p>Ambiente 100% Seguro. Finalize seu pedido, {firstName}!</p>
+      </div>
+
+      <div className="checkout-container">
+
+        <div className="checkout-summary">
+          <h2>Resumo do seu pedido</h2>
+          <div className="checkout-items-list">
+            {cart.map((item) => (
+              <div key={item.id} className="checkout-item">
+                <img
+                  src={item.imageUrl}
+                  alt={item.name}
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'https://via.placeholder.com/70?text=Sem+Foto';
+                  }}
+                />
+                <div className="checkout-item-info">
+                  <span className="chk-name">{item.name}</span>
+                  <span className="chk-qty">Quantidade: {item.quantity}</span>
+                </div>
+                <div className="checkout-item-price">
+                  R$ {(Number(item.price) * item.quantity).toFixed(2)}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="checkout-total-box">
+            <span>Total a pagar:</span>
+            <span className="chk-total-value">R$ {cartTotal.toFixed(2)}</span>
+          </div>
+        </div>
+        <div className="checkout-payment-box">
+          <h2>Pagamento</h2>
+          <p className="payment-subtitle">Escolha como deseja pagar através do Mercado Pago. A confirmação é imediata.</p>
+
+          <div className="mp-container">
+            <CheckoutForm
+                userId={user.id}
+                items={formattedCheckoutItems}
+                totalAmount={cartTotal}
+            />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}

@@ -8,17 +8,14 @@ export function AdminPanel() {
   const [products, setProducts] = useState<Product[]>([]);
   const navigate = useNavigate();
 
-  // Busca os produtos assim que a página carrega
   const { user, isAuthenticated, token } = useAuth(); 
 
   useEffect(() => {
     console.log(token)
-    // 3. Trava de Segurança do Frontend: 
-    // Se não estiver logado ou não for admin, chuta pra fora da página!
     if (!isAuthenticated || user?.role !== 'admin') {
       alert("Acesso restrito a administradores.");
       navigate('/'); 
-      return; // Para a execução aqui
+      return; 
     }
 
     fetchProducts();
@@ -41,7 +38,6 @@ export function AdminPanel() {
       try {
         const res = await fetch(`http://localhost:3000/products/${id}`, { 
           method: 'DELETE',
-          // 4. Passando o token do nosso AuthContext direto no cabeçalho!
           headers: {
             'Authorization': `Bearer ${token}` 
           }
@@ -67,7 +63,6 @@ export function AdminPanel() {
           <h1 className="admin-title">Painel de Administração</h1>
           <p className="admin-subtitle">Gerencie o catálogo da Bereshit</p>
         </div>
-        {/* Reaproveitamos a tela que você já criou para adicionar! */}
         <button className="btn-add-new" onClick={() => navigate('/cadastroProduct')}>
           + Novo Produto
         </button>
@@ -86,7 +81,6 @@ export function AdminPanel() {
           </thead>
           <tbody>
             {products.map(product => {
-              // Calcula o estoque total somando todas as variações de cor/tamanho
               const totalStock = product.variants?.reduce((acc, v) => acc + v.stockQuantity, 0) || 0;
               
               return (
@@ -102,7 +96,6 @@ export function AdminPanel() {
                     </span>
                   </td>
                   <td className="admin-actions">
-                    {/* Vamos criar a lógica de edição no próximo passo! */}
                     <button 
                       className="btn-edit-admin" 
                       onClick={() => alert("Logo vamos conectar isso na tela de edição!")}

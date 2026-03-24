@@ -1,4 +1,4 @@
-/* Container branco que abraça a pesquisa e os filtros */
+
 .filters-container {
     display: flex;
     justify-content: space-between;
@@ -7,18 +7,17 @@
     background-color: #ffffff;
     padding: 20px 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Sombra elegante */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); 
     margin-bottom: 40px;
-    flex-wrap: wrap; /* Ajuda na responsividade */
+    flex-wrap: wrap; 
 }
 
-/* O Campo de Pesquisa */
 .search-input {
     flex: 1;
     min-width: 250px;
     padding: 12px 25px;
     border: 2px solid #eee;
-    border-radius: 30px; /* Arredondado estilo pílula */
+    border-radius: 30px; 
     font-size: 1rem;
     font-family: 'Argue Demo', 'Inter', sans-serif;
     color: #555;
@@ -27,33 +26,32 @@
     background-color: #fcfcfc;
 }
 
-/* Efeito ao clicar para digitar */
+
 .search-input:focus {
-    border-color: #84b37e; /* Verde Bereshit */
+    border-color: #84b37e; 
     background-color: #ffffff;
-    box-shadow: 0 0 0 4px rgba(132, 179, 126, 0.15); /* "Aura" verde em volta */
+    box-shadow: 0 0 0 4px rgba(132, 179, 126, 0.15); 
 }
 
-/* Placeholder (O texto "Buscar coleção...") */
+
 .search-input::placeholder {
     color: #aaa;
 }
 
-/* Container dos Botões de Tamanho */
+
 .size-filters {
     display: flex;
     gap: 10px;
     align-items: center;
-    flex-wrap: wrap; /* Se não couber, joga pra linha de baixo */
+    flex-wrap: wrap; 
 }
 
-/* Botões de Tamanho (Padrão/Inativo) */
 .size-btn {
     background-color: transparent;
     border: 2px solid #eee;
     color: #777;
     padding: 8px 18px;
-    border-radius: 8px; /* Quadrado com pontas suaves */
+    border-radius: 8px; 
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
@@ -61,37 +59,34 @@
     font-family: 'Argue Demo', 'Inter', sans-serif;
 }
 
-/* Efeito ao passar o mouse */
+
 .size-btn:hover {
-    border-color: #4193ae; /* Azul Bereshit */
+    border-color: #4193ae; 
     color: #4193ae;
 }
 
-/* Botão Selecionado (Classe Active) */
 .size-btn.active {
-    background-color: #4193ae; /* Fundo Azul */
+    background-color: #4193ae; 
     border-color: #4193ae;
     color: white;
-    box-shadow: 0 4px 10px rgba(65, 147, 174, 0.3); /* Sombrinha azul */
-    transform: translateY(-2px); /* Efeito do botão levantadinho */
+    box-shadow: 0 4px 10px rgba(65, 147, 174, 0.3);
+    transform: translateY(-2px);
 }
 
-/* =========================================
-   RESPONSIVIDADE (CELULARES)
-   ========================================= */
+
 @media (max-width: 768px) {
     .filters-container {
-        flex-direction: column; /* Coloca a pesquisa em cima e tamanhos embaixo */
-        align-items: stretch; /* Estica a barra para caber na tela toda */
+        flex-direction: column; 
+        align-items: stretch; 
         padding: 15px;
         gap: 15px;
     }
 
     .size-filters {
-        justify-content: center; /* Centraliza os botõezinhos no celular */
+        justify-content: center; 
     }
 
     .size-btn {
-        padding: 8px 15px; /* Botões levemente menores no mobile */
+        padding: 8px 15px; 
     }
 }

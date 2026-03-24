@@ -208,12 +208,10 @@
     color: #c7777d; 
 }
 
-/* =========================================
-   BOTÃO DE ADICIONAR AO CARRINHO
-   ========================================= */
+
 .btn-add-cart {
     padding: 18px;
-    background-color: #84b37e; /* Verde Bereshit */
+    background-color: #84b37e;
     color: white;
     border: none;
     border-radius: 10px;
@@ -221,8 +219,8 @@
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(132, 179, 126, 0.3); /* Sombra verde */
-    margin-top: auto; /* Empurra o botão pro final do card */
+    box-shadow: 0 4px 15px rgba(132, 179, 126, 0.3); 
+    margin-top: auto; 
 }
 
 .btn-add-cart:hover:not(:disabled) {
@@ -237,7 +235,7 @@
     transform: none;
 }
 
-/* Loading e Erro */
+
 .loading, .error-msg {
     text-align: center;
     padding: 100px 20px;

@@ -32,7 +32,6 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
     },
   };
 
-  // ⚡ Polling — verifica se o Pix foi pago a cada 5 segundos
   useEffect(() => {
     if (!orderId || mensagem !== 'pix') return;
 
@@ -44,7 +43,7 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
         if (order.status === 'PAGO') {
           clearInterval(intervalo);
           setPixData(null);
-          setMensagem('cartao'); // reutiliza tela de sucesso
+          setMensagem('cartao'); 
         }
       } catch (e) {
         console.error("Erro ao verificar status do pedido:", e);
@@ -74,10 +73,6 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
         return;
       }
 
-      // ==========================================
-      // A MÁGICA AQUI: O pedido foi criado no banco! 
-      // Já podemos esvaziar o carrinho com segurança.
-      // ==========================================
       clearCart(); 
 
       if (data.qr_code_base64) {
@@ -107,7 +102,6 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
     navigate('/catalogo');
   };
 
-  // ✅ Tela de sucesso
   if (mensagem === 'cartao') {
     return (
       <div className="checkout-mensagem sucesso">
@@ -117,7 +111,7 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
     );
   }
 
-  // ⚡ Tela de QR Code Pix
+
   if (mensagem === 'pix' && pixData) {
     return (
       <div className="checkout-mensagem sucesso">
@@ -154,7 +148,6 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
     );
   }
 
-  // ❌ Tela de erro
   if (mensagem.includes('❌')) {
     return (
       <div className="checkout-mensagem erro">
@@ -164,7 +157,7 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
     );
   }
 
-  // ⏳ Processando
+
   if (mensagem) {
     return (
       <div className="checkout-mensagem">
@@ -173,7 +166,7 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
     );
   }
 
-  // 🏠 Tela padrão — Brick do MP
+
   return (
     <div className="checkout-form">
       <Payment

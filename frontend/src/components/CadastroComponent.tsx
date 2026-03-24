@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import '../css/Auth.css'; // <-- IMPORTANTE!
+import '../css/Auth.css'; 
 
 export default function CadastroComponent() {
 
@@ -19,7 +19,6 @@ export default function CadastroComponent() {
     setErro('');
 
     try {
-      // ATENÇÃO: Confirme se a sua rota no backend é /users ou /cadastro!
       const response = await fetch('http://localhost:3000/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -28,10 +27,9 @@ export default function CadastroComponent() {
 
       if (response.ok) {
         alert('Conta criada com sucesso na Bereshit!');
-        navigate('/login'); // Manda o usuário fazer login
+        navigate('/login');
       } else {
         const data = await response.json();
-        // Se o Yup estourar erro, ele vem no array 'errors' ou no 'error'
         setErro(data.errors ? data.errors.join(', ') : data.error);
       }
     } catch (error) {

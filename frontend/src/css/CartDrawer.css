@@ -1,4 +1,4 @@
-/* Fundo escuro que cobre a tela toda */
+
 .cart-overlay {
     position: fixed;
     top: 0;
@@ -9,23 +9,23 @@
     z-index: 999;
 }
 
-/* A gaveta lateral */
+
 .cart-drawer {
     position: fixed;
     top: 0;
-    right: -400px; /* Começa escondido fora da tela */
+    right: -400px;
     width: 100%;
-    max-width: 400px; /* Largura do menu */
+    max-width: 400px; 
     height: 100vh;
     background-color: white;
     box-shadow: -2px 0 15px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    transition: right 0.4s ease-in-out; /* O efeito de deslizar */
+    transition: right 0.4s ease-in-out; 
     display: flex;
     flex-direction: column;
 }
 
-/* Classe que é adicionada quando o isOpen for true */
+
 .cart-drawer.open {
     right: 0;
 }
@@ -35,7 +35,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #4193ae; /* Azul Bereshit */
+    background-color: #4193ae; 
     color: white;
 }
 
@@ -77,7 +77,7 @@
 
 .item-info p {
     margin: 0;
-    color: #84b37e; /* Verde Bereshit */
+    color: #84b37e; 
     font-weight: bold;
 }
 
@@ -110,7 +110,7 @@
 }
 
 .remove-btn {
-    color: #c7777d; /* Rosa Bereshit */
+    color: #c7777d;
     cursor: pointer;
     font-size: 20px;
 }
@@ -133,7 +133,7 @@
 .checkout-btn {
     width: 100%;
     padding: 15px;
-    background-color: #84b37e; /* Verde Bereshit */
+    background-color: #84b37e;
     color: white;
     border: none;
     border-radius: 8px;
@@ -147,20 +147,18 @@
     background-color: #729c6d;
 }
 
-/* Estilo para o campo de digitar a quantidade */
 .cart-qtd-input {
     width: 40px;
     text-align: center;
     border: none;
     font-weight: bold;
-    color: #4193ae; /* Azul Bereshit */
+    color: #4193ae; 
     font-size: 16px;
     outline: none;
-    -moz-appearance: textfield; /* Remove as setinhas no Firefox */
+    -moz-appearance: textfield; 
     background: transparent;
 }
 
-/* Remove as setinhas no Chrome, Safari, Edge */
 .cart-qtd-input::-webkit-outer-spin-button,
 .cart-qtd-input::-webkit-inner-spin-button {
     -webkit-appearance: none;

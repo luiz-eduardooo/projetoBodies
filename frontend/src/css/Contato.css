@@ -1,0 +1,125 @@
+.contato-page {
+    background-color: #f7f9f8;
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+    font-family: 'Inter', sans-serif;
+}
+
+.contato-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.contato-header h1 {
+    font-family: 'Glimmer of Light', serif;
+    font-size: 2.8rem;
+    color: #4193ae; /* Azul Bereshit */
+    margin-bottom: 5px;
+}
+
+.contato-header p {
+    color: #84b37e; /* Verde Bereshit */
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.contato-container {
+    max-width: 800px; /* Reduzido para ficar bem centralizado */
+    margin: 0 auto;
+}
+
+.contato-info-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    text-align: center;
+}
+
+.contato-info-card h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.contato-subtitle {
+    color: #666;
+    margin-bottom: 40px;
+    line-height: 1.5;
+}
+
+/* Um Grid para colocar as informações em duas colunas no PC */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+@media (min-width: 600px) {
+    .info-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px;
+    background: #fcfcfc;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.info-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.info-item .material-symbols-outlined {
+    color: #84b37e;
+    font-size: 28px;
+    background: rgba(132, 179, 126, 0.1);
+    padding: 12px;
+    border-radius: 50%;
+}
+
+.info-item strong {
+    display: block;
+    color: #333;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.info-item p {
+    margin: 0;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.contato-action {
+    margin-top: 20px;
+}
+
+.btn-whatsapp {
+    display: inline-block;
+    background-color: #25D366; /* Cor oficial do WhatsApp */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.1s;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1ebe5d;
+}
+
+.btn-whatsapp:active {
+    transform: scale(0.98);
+}
