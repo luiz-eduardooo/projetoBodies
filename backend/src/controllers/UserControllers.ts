@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import * as yup from "yup";
+import { decryptData, encryptData } from "../middlewares/cryptoUtils";
 
 
 const schema = yup.object().shape({
@@ -20,8 +21,9 @@ export const criarUsuario = async (req: Request, res: Response) => {
     const { name, email, password, phone, cpf} = req.body;
     try {
         await schema.validate(req.body, { abortEarly: false });
+        const cpfCrypto = encryptData(cpf)
         const userRepository = AppDataSource.getRepository(User);
-        const existingCpf = await userRepository.findOneBy({cpf})
+        const existingCpf = await userRepository.findOneBy({cpf:cpfCrypto})
         const existingPhone = await userRepository.findOneBy({phone})
         const existingUser = await userRepository.findOneBy({ email});
         if (existingUser) {
@@ -34,7 +36,7 @@ export const criarUsuario = async (req: Request, res: Response) => {
             return res.status(400).json({error:"Telefone ja está em uso!"})
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = userRepository.create({ name, email, password: hashedPassword, phone, cpf });
+        const user = userRepository.create({ name, email, password: hashedPassword, phone, cpf:cpfCrypto });
         await userRepository.save(user);
         res.status(201).json({ message: "Usuário criado com sucesso" });
     } catch (error) {

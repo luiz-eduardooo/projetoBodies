@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../css/header.css";
 import logoPng from "../img/logo.png";
@@ -14,15 +14,14 @@ const Header = () => {
 
   const handleSair = () => {
     logout();
-    clearCart(); // Limpa o carrinho ao sair para não misturar com outro cliente
+    clearCart(); // Limpa o carrinho ao sair
   };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // A TRAVA DE SEGURANÇA: 
-  // Verifica se 'user' e 'user.name' existem. Se sim, pega o primeiro nome. Se não, escreve "Admin" ou "Cliente".
+  // Trava de segurança para o nome não quebrar a tela
   const firstName = user?.name ? user.name.split(' ')[0] : 'Visitante';
 
   return (
@@ -45,7 +44,17 @@ const Header = () => {
       <nav id="containerHeader" className={isMenuOpen ? 'open' : ''}>
         <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
         <Link to="/catalogo" onClick={() => setIsMenuOpen(false)}>Produtos</Link>
-        <Link to="/admin" onClick={() => setIsMenuOpen(false)}>Painel</Link> {/* Já deixei um atalho pro painel aqui! */}
+        
+        {/* Links que aparecem para todo mundo */}
+        <Link to="/sobre" onClick={() => setIsMenuOpen(false)}>Sobre Nós</Link>
+        <Link to="/contato" onClick={() => setIsMenuOpen(false)}>Contato</Link>
+        
+        {/* A MÁGICA AQUI: O botão Painel só renderiza se o usuário for admin! */}
+        {user?.role === 'admin' && (
+          <Link to="/admin" className="admin-link" onClick={() => setIsMenuOpen(false)}>
+            Painel Admin
+          </Link>
+        )}
       </nav>
       
       {/* Área do Usuário (Carrinho e Login) */}
@@ -59,7 +68,6 @@ const Header = () => {
         
         {isAuthenticated ? (
           <div className="user-logged">
-            {/* Agora aqui não quebra mais! */}
             <span className="user-name">Olá, {firstName}</span>
             <div className="logout-btn-container" onClick={handleSair} title="Sair">
               <span className="material-symbols-outlined logout-icon">logout</span>
