@@ -1,5 +1,5 @@
-import { useEffect, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useMemo} from 'react';
+import {useNavigate} from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import '../css/CheckOutPage.css';
@@ -7,22 +7,33 @@ import { CheckoutForm } from './CheckoutForm';
 
 export function Checkout() {
   const { cart, cartTotal } = useCart();
+
   const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
   const LIMITE_VIP = 10000;
   const WHATSAPP_LOJA = '553299875202'; // ← número da loja com DDI+DDD
 
   useEffect(() => {
+    
+
+
+
 
     if (!isAuthenticated || !user) {
       alert("Você precisa fazer login para finalizar a compra!");
       navigate('/login', { state: { from: '/checkout' } });
     }
 
-    else if (cart.length === 0) {
-      alert("Seu carrinho está vazio.");
-      navigate('/catalogo');
-    }
+    if (localStorage.getItem('fromCheckout') === 'true') {
+    localStorage.removeItem('fromCheckout');
+    return;  // Skip silencioso ✅
+  }
+   
+
+    if (cart.length === 0) {  // ← VERIFICA ORIGEM
+    alert("Seu carrinho está vazio.");
+    navigate('/catalogo');
+  }
   }, [isAuthenticated, user, cart, navigate]);
 
 

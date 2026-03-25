@@ -46,6 +46,7 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
           aprovado.current = true;       // ← trava para não executar duas vezes
           clearInterval(intervalo);
           setPixData(null);
+
           setMensagem('cartao');         // ← NÃO limpa o carrinho aqui!
         }
       } catch (e) {
@@ -99,19 +100,24 @@ export function CheckoutForm({ userId, items, totalAmount }: CheckoutProps) {
 
   // ← clearCart() só acontece aqui, quando usuário clica "Nova compra"
   const resetar = () => {
-    clearCart();
-    setMensagem('');
-    setPixData(null);
-    setOrderId(null);
-    aprovado.current = false;
-    navigate('/catalogo');
-  };
+  setMensagem('');
+  setPixData(null);
+  setOrderId(null);
+  aprovado.current = false  
+  // Marca que veio da confirmação
+  localStorage.setItem('fromCheckout', 'true');
+
+  localStorage.setItem('fromCheckout', 'true'); 
+  clearCart();
+  navigate('/catalogo');
+
+};
 
   if (mensagem === 'cartao') {
     return (
       <div className="checkout-mensagem sucesso">
         <p>🎉 Pagamento Aprovado! Pedido gerado com sucesso!</p>
-        <button onClick={resetar}>Nova compra</button>
+        <button onClick={resetar}>Voltar ao Catálogo</button>
       </div>
     );
   }
