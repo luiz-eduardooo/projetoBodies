@@ -9,6 +9,9 @@ export function AdminPanel() {
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
   const { user, isAuthenticated, token } = useAuth(); 
+  const [edicoesEstoque, setEdicoesEstoque] = useState<Record<string, number>>({});
+  const [estoqueModal, setEstoqueModal] = useState<{ productId: string; variantId: string; atual: number } | null>(null);
+
 
   useEffect(() => {
     if (!isAuthenticated || user?.role !== 'admin') {
@@ -55,6 +58,48 @@ export function AdminPanel() {
     }
   };
 
+  const abrirModal = (product: Product) => {
+  const initialValues: Record<string, number> = {};
+  
+  if (product.variants) {
+    product.variants.forEach(v => {
+      // Usamos o ID da variante como chave e a quantidade atual como valor
+      initialValues[v.id as string] = v.stockQuantity;
+    });
+  }
+  
+  setEdicoesEstoque(initialValues);
+  setEstoqueModal({ 
+    productId: product.id as string, 
+    variantId: '', 
+    atual: 0 
+  });
+};
+
+const handleSalvarTudo = async () => {
+  try {
+    // Enviamos o objeto edicoesEstoque completo
+    const res = await fetch(`${API_URL}/variants/update-bulk`, {
+      method: 'PATCH',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': `Bearer ${token}` 
+      },
+      body: JSON.stringify({ updates: edicoesEstoque })
+    });
+
+    if (res.ok) {
+      alert('Todos os estoques foram atualizados!');
+      setEstoqueModal(null);
+      fetchProducts();
+    }
+  } catch (error) {
+    console.error("Erro ao atualizar em lote:", error);
+  }
+};
+
+
+
   return (
     <div className="admin-container">
       <div className="admin-header">
@@ -66,6 +111,42 @@ export function AdminPanel() {
           + Novo Produto
         </button>
       </div>
+
+     
+      
+      {estoqueModal && (
+  <div className="modal-overlay" onClick={() => setEstoqueModal(null)}>
+   <div className="modal-box" onClick={e => e.stopPropagation()}>
+  <h3>Gerenciar Estoque</h3>
+  
+  <div className="variant-list">
+    {products.find(p => p.id === estoqueModal.productId)?.variants?.map(variant => (
+      <div key={variant.id} className="variant-item">
+        <span className="variant-info">{variant.size} / {variant.color}</span>
+        <input 
+          type="number" 
+          className="modal-input-stock"
+          value={edicoesEstoque[variant.id as string] || 0}
+          onChange={(e) => setEdicoesEstoque({
+            ...edicoesEstoque,
+            [variant.id as string]: Number(e.target.value)
+          })}
+        />
+      </div>
+    ))}
+  </div>
+
+  <div className="modal-actions">
+    <button className="btn-save-all" onClick={handleSalvarTudo}>
+      Salvar Todas as Alterações
+    </button>
+    <button className="btn-cancel-modal" onClick={() => setEstoqueModal(null)}>
+      Cancelar
+    </button>
+  </div>
+</div>
+  </div>
+)}
 
       <div className="admin-table-wrapper">
         <table className="admin-table">
@@ -96,8 +177,11 @@ export function AdminPanel() {
                   </td>
                   <td className="admin-actions-cell" style={{ textAlign: 'center' }}>
                   <div className="admin-actions">
+                    <button className="btn-edit-admin"onClick={() => navigate(`/cadastroProduct/${product.id}`)}>Editar</button>
 
-                    <button   className="btn-edit-admin"onClick={() => navigate(`/cadastroProduct/${product.id}`)}>Editar</button>
+                    <button className="btn-stock-admin" onClick={() => abrirModal(product)}>
+  + Estoque
+</button>
                     <button 
                       className="btn-delete-admin" 
                       onClick={() => handleDelete(product.id as string)}

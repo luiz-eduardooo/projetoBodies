@@ -217,3 +217,28 @@ export const atualizarProduto = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Erro ao atualizar produto" });
   }
 }
+
+export const atualizarEstoqueLote = async (req: Request, res: Response) => {
+  const { updates } = req.body; // Espera algo como: { "id1": 10, "id2": 5 }
+
+  if (!updates || Object.keys(updates).length === 0) {
+    return res.status(400).json({ error: 'Nenhum dado para atualizar' });
+  }
+
+  try {
+    const repo = AppDataSource.getRepository(ProductVariant);
+
+    // Criamos uma lista de promessas para rodar todas as atualizações
+    const updatePromises = Object.entries(updates).map(([id, quantity]) => {
+      return repo.update(id, { stockQuantity: Number(quantity) });
+    });
+
+    // Executa todas de uma vez
+    await Promise.all(updatePromises);
+
+    return res.json({ message: "Estoques atualizados com sucesso!" });
+  } catch (error) {
+    console.error("Erro no bulk update:", error);
+    return res.status(500).json({ error: 'Erro interno ao atualizar estoque' });
+  }
+};

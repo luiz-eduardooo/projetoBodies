@@ -178,3 +178,150 @@
         font-size: 0.8rem;
     }
 }
+.btn-stock-admin {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: rgba(132, 179, 126, 0.15);
+    color: #84b37e;
+    white-space: nowrap;
+}
+
+.btn-stock-admin:hover {
+    background-color: #84b37e;
+    color: white;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.modal-box {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.modal-box h3 {
+    color: #4193ae;
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.modal-input {
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.modal-input:focus {
+    border-color: #4193ae;
+}
+
+.modal-actions {
+    display: flex;
+    flex-direction: column; /* Botões um em cima do outro fica melhor aqui */
+    gap: 10px;
+    margin-top: 10px;
+}
+.btn-save-all {
+    background-color: rgba(65, 147, 174, 0.1);
+    color: #4193ae;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-save-all:hover {
+    background-color:#4193ae; /* Escurece o azul, mantém texto branco */
+    color: white
+}
+
+/* Botão de cancelar/fechar (cinza suave) */
+.btn-cancel-modal {
+    background-color: rgba(199, 119, 125, 0.1);
+    color: #c7777d;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-cancel-modal:hover {
+    background-color: #c7777d;
+    color: white;
+}
+
+/* Container da lista de variantes no modal */
+.variant-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding-right: 8px; /* Espaço para a scrollbar */
+}
+
+/* Customização da scrollbar para ficar discreta */
+.variant-list::-webkit-scrollbar {
+    width: 6px;
+}
+.variant-list::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 10px;
+}
+
+/* Linha de cada variante */
+.variant-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.variant-item:last-child {
+    border-bottom: none;
+}
+
+.variant-info {
+    font-size: 0.95rem;
+    color: #555;
+    font-weight: 500;
+}
+
+/* Input menor e centralizado dentro do modal */
+.modal-input-stock {
+    width: 80px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    text-align: center;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.modal-input-stock:focus {
+    border-color: #4193ae;
+    box-shadow: 0 0 0 2px rgba(65, 147, 174, 0.1);
+}

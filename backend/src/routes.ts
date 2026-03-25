@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authMiddleware, adminMiddleware } from "./middlewares/authMiddleware";
-import { createProduct, deletarProduto, listarProdutos, atualizarProduto, buscarProdutoPorId } from "./controllers/ProductControllers";
+import { createProduct, deletarProduto, listarProdutos, atualizarProduto, buscarProdutoPorId, atualizarEstoqueLote } from "./controllers/ProductControllers";
 import { criarUsuario, loginUsuario } from "./controllers/UserControllers";
 import multer from "multer";
 import { multerConfig } from "./multer";
@@ -23,6 +23,7 @@ router.get("/products/:id", buscarProdutoPorId);
 router.post("/orders", authMiddleware,criarPedido)
 // routes.ts
 router.post('/orders/webhook', webhookPedido);
+router.patch("/variants/update-bulk", authMiddleware, adminMiddleware, atualizarEstoqueLote);
 export default router;
 
 
