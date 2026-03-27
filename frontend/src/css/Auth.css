@@ -1,31 +1,31 @@
 /* Container que centraliza o formulário na tela */
 .auth-container {
-    max-width: 450px; /* Largura ideal para formulários não ficarem esticados */
+    max-width: 450px;
     margin: 80px auto;
     padding: 40px;
     background-color: #ffffff;
     border-radius: 16px;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08); /* Sombra elegante e profunda */
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
     font-family: 'Argue Demo', 'Inter', sans-serif;
     text-align: center;
 }
 
-/* Título (Login ou Criar Conta) */
+/* Título */
 .auth-title {
-    font-family: 'Glimmer of Light', serif;
+    font-family: 'Glimmer of Light', sans-serif;
     font-size: 2.5rem;
     margin-bottom: 25px;
-    color: #4193ae; /* Azul padrão */
+    color: #4193ae;
 }
 
 .auth-title.green {
-    color: #84b37e; /* Verde Bereshit (como você definiu no componente!) */
+    color: #84b37e;
 }
 
-/* Mensagem de Erro (Estilosa e sem quebrar o layout) */
+/* Erro */
 .auth-error {
-    background-color: #fdf2f3; /* Fundo rosinha bem claro */
-    color: #c7777d; /* Rosa Bereshit */
+    background-color: #fdf2f3;
+    color: #c7777d;
     padding: 12px;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -34,14 +34,47 @@
     border: 1px solid #f8dce0;
 }
 
-/* Organização dos campos */
+/* ← NOVO: Seletor PF / PJ */
+.auth-tipo-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.auth-tipo-btn {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    background: #fcfcfc;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    color: #aaa;
+    transition: all 0.3s ease;
+}
+
+.auth-tipo-btn:hover {
+    border-color: #84b37e;
+    color: #84b37e;
+}
+
+.auth-tipo-btn.active {
+    border-color: #84b37e;
+    background-color: #f3faf2;
+    color: #6d9c67;
+    font-weight: bold;
+    box-shadow: 0 0 0 4px rgba(132, 179, 126, 0.15);
+}
+
+/* Formulário */
 .auth-form {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Espaço perfeito entre os inputs */
+    gap: 15px;
 }
 
-/* Campos de digitação (Inputs) */
+/* Inputs */
 .auth-input {
     width: 100%;
     padding: 15px 20px;
@@ -55,22 +88,21 @@
     background-color: #fcfcfc;
 }
 
-/* Efeito ao clicar para digitar */
 .auth-input:focus {
-    border-color: #84b37e; /* Borda Verde */
+    border-color: #84b37e;
     background-color: #ffffff;
-    box-shadow: 0 0 0 4px rgba(132, 179, 126, 0.15); /* Aura verde em volta */
+    box-shadow: 0 0 0 4px rgba(132, 179, 126, 0.15);
 }
 
 .auth-input::placeholder {
     color: #aaa;
 }
 
-/* Botão de Ação (Entrar ou Cadastrar) */
+/* Botão principal */
 .auth-button {
     width: 100%;
     padding: 16px;
-    background-color: #84b37e; /* Verde Bereshit */
+    background-color: #84b37e;
     color: white;
     border: none;
     border-radius: 10px;
@@ -79,15 +111,15 @@
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 10px;
-    box-shadow: 0 4px 15px rgba(132, 179, 126, 0.3); /* Sombra verde */
+    box-shadow: 0 4px 15px rgba(132, 179, 126, 0.3);
 }
 
 .auth-button:hover {
     background-color: #6d9c67;
-    transform: translateY(-2px); /* Efeito do botão pulando */
+    transform: translateY(-2px);
 }
 
-/* Rodapé (Link para a outra tela) */
+/* Rodapé */
 .auth-footer {
     margin-top: 25px;
     color: #666;
@@ -95,26 +127,28 @@
 }
 
 .auth-link {
-    color: #4193ae; /* Azul Bereshit */
+    color: #4193ae;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
 .auth-link:hover {
-    color: #c7777d; /* Fica Rosa/Goiaba ao passar o mouse */
+    color: #c7777d;
     text-decoration: underline;
 }
 
-/* =========================================
-   RESPONSIVIDADE (CELULARES)
-   ========================================= */
+/* Responsividade */
 @media (max-width: 500px) {
     .auth-container {
-        margin: 40px 20px; /* Adapta a margem pra telas menores */
+        margin: 40px 20px;
         padding: 30px 20px;
     }
     .auth-title {
         font-size: 2.2rem;
+    }
+    .auth-tipo-btn {
+        font-size: 0.85rem;
+        padding: 10px 8px;
     }
 }
