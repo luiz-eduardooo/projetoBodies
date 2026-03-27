@@ -11,7 +11,7 @@ export function Checkout() {
   const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
   const LIMITE_VIP = 10000;
-  const WHATSAPP_LOJA = '553299875202'; // ← número da loja com DDI+DDD
+  const WHATSAPP_LOJA = '553299667442'; // ← número da loja com DDI+DDD
 
   useEffect(() => {
     

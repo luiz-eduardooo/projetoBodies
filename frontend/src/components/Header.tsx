@@ -66,12 +66,13 @@ const Header = () => {
       
       {/* Área do Usuário (Carrinho e Login) */}
       <div id="user">
-        <div className="cart-icon-container" title="Carrinho de Compras" onClick={openCart}>
+        {isAuthenticated?
+        (<div className="cart-icon-container" title="Carrinho de Compras" onClick={openCart}>
           <span className="material-symbols-outlined cart-icon">shopping_cart</span>
           {itemCount > 0 && (
             <span className="cart-badge">{itemCount}</span>
           )}
-        </div>
+        </div>):""}
         
         {isAuthenticated ? (
           <div className="user-logged">
