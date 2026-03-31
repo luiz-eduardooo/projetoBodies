@@ -2,7 +2,7 @@
    "name": "projetobodies",
    "version": "0.0.1",
    "description": "Awesome project developed with TypeORM.",
-   "type": "module",
+   "type": "commonjs",
    "devDependencies": {
       "@types/bcryptjs": "^2.4.6",
       "@types/cors": "^2.8.19",
