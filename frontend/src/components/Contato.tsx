@@ -1,4 +1,3 @@
-import React from 'react';
 import '../css/Contato.css';
 
 export function Contato() {
