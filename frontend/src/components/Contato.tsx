@@ -20,7 +20,7 @@ export function Contato() {
               <span className="material-symbols-outlined">mail</span>
               <div>
                 <strong>E-mail</strong>
-                <p>suporte@bereshit.com.br</p>
+                <p>comercialbereshit1@gmail.com</p>
               </div>
             </div>
 
@@ -44,7 +44,7 @@ export function Contato() {
               <span className="material-symbols-outlined">location_on</span>
               <div>
                 <strong>Endereço</strong>
-                <p>Vermelho, 123 - Muriaé, MG</p>
+                <p>Rua Principal, 321 - Muriaé, MG</p>
               </div>
             </div>
           </div>
