@@ -32,11 +32,11 @@ const Footer = () => {
           </div>
           <div className="contact-info">
             <span className="material-symbols-outlined">location_on</span>
-            <p>Rua Alberto Cerqueira</p>
+            <p>Rua Principal, 321 - Vermelho, Muriaé</p>
           </div>
           <div className="contact-info">
             <span className="material-symbols-outlined">alternate_email</span>
-            <p>@bereshit.oficial</p>
+            <a href="https://www.instagram.com/fabricabereshit/" target="_blank"><p>@fabricabereshit</p></a>
           </div>
         </div>
 

@@ -24,6 +24,10 @@ router.post("/orders", authMiddleware,criarPedido)
 // routes.ts
 router.post('/orders/webhook', webhookPedido);
 router.patch("/variants/update-bulk", authMiddleware, adminMiddleware, atualizarEstoqueLote);
+
+router.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
 export default router;
 
 

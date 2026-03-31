@@ -8,8 +8,11 @@ import path from "path";
 AppDataSource.initialize().then(() => {
     const app = express();
 
-    app.use(cors()); 
-
+    app.use(cors({
+  origin: 'https://projeto-bodies.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
     // O MESMO CAMINHO DO MULTER (Saindo do backend e indo pra uploads)
     const caminhoDasImagens = path.resolve(process.cwd(), "..", "uploads");
     app.use("/uploads", express.static(caminhoDasImagens));
